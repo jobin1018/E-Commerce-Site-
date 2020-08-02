@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/0c3e909231.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <title>Ecom Site</title>
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <div class="brand">
+                <span>laceUP</span>
+            </div>
+            <div class="drop-down">
+                <a class="drop-down-btn" href="#">Categories</a>
+                <div class="drop-down-content">
+                    {% for category in categories %}
+                    <a href="{% url 'product_by_category' category.id %}">{{category.title}}</a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="nav-links">
+                <ul>
+                    <li> <a href="{% url 'store' %}">Store</a> </li>
+                    <li> <a href="">Login</a> </li>
+                </ul>
+                <a href="{% url 'cart' %}"><i class="fas fa-cart-arrow-down"></i></a>
+                <p id="cart-total">[{{cart_item_count}}]</p>
+            </div>
+        </div>
+    </header>
+
+    {% block content %}
+    {% endblock %}
+    <script type="text/javascript">
+        var user = '{{ request.user }}'
+        function getToken(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        var csrftoken = getToken('csrftoken');
+    </script>
+
+    <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+
+</html>

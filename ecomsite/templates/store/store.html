@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<section class="store-section">
+    <div class="hero-section">
+        <div class="bg-img">
+            <div class="hero-bg-overlay">
+
+            </div>
+            <div class="hero-text" data-aos="fade-down" data-aos-offset="300" data-aos-duration="1000">
+                <h1>Make<br>
+                    your<br>
+                    steps<br>
+                    stylish<br></h1>
+                <h6>Shoes speak louder than words</h6>
+            </div>
+        </div>
+        <button class="hero-btn"><a href="#product-wrapper">Shop Now</a></button>
+
+    </div>
+    <div class="products-page-title">
+        <h1>Collections</h1>
+    </div>
+    <div id="product-wrapper">
+        {% for product in products %}
+        <div class="product-card" data-aos="fade-right" data-aos-offset="300" data-aos-duration="1000">
+            <div class="product-card-img">
+                <img src="{{product.image.url}}">
+            </div>
+            <div class="product-card-info">
+                <p class="product-name">{{product.name}}</p>
+                <hr>
+                <button data-product="{{product.id}}" data-action="add" class="product-info-btn add-to-cart">Add to
+                    cart</button>
+                <button class="product-info-btn view-btn"><a
+                        href="{% url 'product_detail' product.id %}">View</a></button>
+                <p class="price">&#x20b9;{{product.price}}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

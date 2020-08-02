@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="product-detail-section">
+    <div class="product-detail-img" data-aos="fade-right" data-aos-offset="300" data-aos-duration="1000">
+        <img src="{{product.image.url}}">
+    </div>
+    <div class="product-detail-info" data-aos="fade-up" data-aos-offset="300" data-aos-duration="1000">
+        <h1>{{product.name}}</h1>
+        <h4>&#x20b9;{{product.price}}</h4>
+        <button data-product="{{product.id}}" data-action="add"
+            class="product-info-btn add-to-cart add-to-cart-detail-page">Add to
+            cart</button>
+        <h2>Description</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia delectus in illo temporibus voluptatibus
+            eum velit odit aliquid, dolor unde quasi excepturi recusandae saepe quis nostrum, cupiditate fugiat libero
+            sapiente obcaecati odio. Alias reprehenderit, culpa quae animi facere necessitatibus nulla!</p>
+    </div>
+</div>
+
+{% endblock %}

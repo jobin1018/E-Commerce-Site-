@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<section class="cart-section" data-aos="fade-down" data-aos-offset="300" data-aos-duration="1000">
+    <div class="cart-top-section">
+        <div class="top-section-upper">
+            <button class="top-section-upper-btn"><a href="{% url 'store' %}">&#8592;Continue Shopping</a></button>
+        </div>
+        <div class="top-section-lower">
+            <p>Items: {{order.total_cart_items}}</p>
+            <p>Total: &#x20b9;{{order.total_cart_price}}</p>
+            <button class="top-section-lower-btn"><a href="{% url 'checkout' %}">Checkout</a></button>
+        </div>
+    </div>
+    {% for item in items %}
+    <div class="cart-bottom-section">
+        <div class="cart-img-thumbnail-wrapper">
+            <img class="cart-img-thumbnail" src="{{item.product.image.url}}">
+        </div>
+        <table>
+            <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>
+                    Quantity
+                </th>
+                <th>Total</th>
+            </tr>
+            <tr>
+                <td>{{item.product.name}}</td>
+                <td>&#x20b9;{{item.product.price}}</td>
+                <td>
+                    <div class="arrow-img"> <img data-product="{{item.product.id}}" data-action="add"
+                            class="add-to-cart" src="{% static 'media/arrow-up.png' %}">
+                        <img data-product="{{item.product.id}}" data-action="remove" class="add-to-cart"
+                            src="{% static 'media/arrow-down.png' %}"></div>{{item.quantity}}
+                </td>
+                <td>&#x20b9;{{item.get_total}}</td>
+            </tr>
+        </table>
+    </div>
+    {% endfor %}
+</section>
+
+{% endblock %}
